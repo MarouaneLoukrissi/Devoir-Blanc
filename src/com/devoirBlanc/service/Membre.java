@@ -39,33 +39,21 @@ public class Membre {
 	public Set<Membre> chargerListeMembre(String nomFichier) throws IOException{
 		Set<Membre> SetOfMembers = new HashSet<Membre>(); 
 		BufferedReader BR = new BufferedReader(new FileReader("src/com/devoirBlanc/data/" + nomFichier));
-//		String line = null;
-//		while((line = BR.readLine()) != null) {
-//			String[] parts = line.split(",");
-//			if (parts.length == 4) {
-//			Membre m = new Membre(UUID.randomUUID().toString(), parts[0].trim(), parts[1].trim(), parts[2].trim(), parts[3].trim());
-//			SetOfMembers.add(m);
-//			System.out.println(m.getNom());
-//			} else {
-//				System.err.println("Ligne mal formatée : " + line);
-//			}
-//		}
-//		return SetOfMembers;
 		return BR.lines()
-                .map(line -> line.split(",")) // Diviser chaque ligne par ","
-                .filter(parts -> parts.length == 4) // Filtrer les lignes correctement formatées
+                .map(line -> line.split(","))
+                .filter(parts -> parts.length == 4)
                 .map(parts -> new Membre(
-                        UUID.randomUUID().toString(), // Générer un identifiant unique
+                        UUID.randomUUID().toString(),
                         parts[0].trim(), parts[1].trim(), parts[2].trim(), parts[3].trim()
                 ))
                 .collect(Collectors.toMap(
-                        membre -> membre.getNom() + membre.getPrenom() + membre.getEmail() + membre.getPhone(), // Clé unique pour détection des doublons
-                        membre -> membre, // Valeur
-                        (m1, m2) -> m1 // En cas de conflit, garder le premier
+                        membre -> membre.getNom() + membre.getPrenom() + membre.getEmail() + membre.getPhone(),
+                        membre -> membre,
+                        (m1, m2) -> m1
                 ))
                 .values()
                 .stream()
-                .collect(Collectors.toSet()); // Convertir en Set
+                .collect(Collectors.toSet());
 	}
 	public String getIdentifiant() {
 		return identifiant;

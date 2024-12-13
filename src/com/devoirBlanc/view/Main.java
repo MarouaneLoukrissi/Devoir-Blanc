@@ -16,11 +16,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Load the FXML file
             Parent root = FXMLLoader.load(getClass().getResource("UI.fxml"));
-            // Set the scene and show the stage
             Scene scene = new Scene(root);
-//            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             primaryStage.setTitle("Add a member");
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -42,7 +39,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args); // This starts the JavaFX application
+        launch(args); 
     }
 }
 
